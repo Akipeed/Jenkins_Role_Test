@@ -1,0 +1,52 @@
+jenkins:
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
+  authorizationStrategy:
+    roleBased:
+      roles:
+        global:
+          - name: "admin"
+            description: "Jenkins administrators"
+            permissions:
+              - "Overall/Administer"
+            assignments:
+              - "admin"
+          - name: "readonly"
+            description: "Read-only users"
+            permissions:
+              - "Overall/Read"
+              - "Job/Read"
+            assignments:
+              - "authenticated"
+        items:
+          - name: "deployer"
+            description: "Configure"
+            permissions:
+              - "Job/Configure"
+              - "Job/Delete"
+              - "Job/Build"
+            assignments:
+              - "deployer"
+          - name: "developer"
+            description: "Build and check logs"
+            permissions: 
+              - "Job/Build"
+              - "Job/Read"
+            assignments:
+              - "developer"
+          - name: "prod-deployer"
+            description: "Prod deployment"
+            permissions:
+              - "Job/Build"
+              - "Job/Read"
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin"
+        - id: "deployer"
+          password: "deployer"
+        - id: "developer"
+          password: "developer"
+        - id: "prod-deployer"
+          password: "prod-deployer"
