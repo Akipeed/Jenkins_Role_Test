@@ -24,6 +24,7 @@ jenkins:
               - "Job/Configure"
               - "Job/Delete"
               - "Job/Build"
+              - "job/Create"
             assignments:
               - "deployer"
           - name: "developer"
