@@ -8,7 +8,10 @@ ARG USER_ID
 # RUN groupmod -g ${USER_GROUP_ID} jenkins
 # RUN usermod -u ${USER_ID} -g ${USER_GROUP_ID} jenkins \ 
     # chown ${REF} since we changed the UID
-
+RUN apt-get update \
+      && apt-get install -y sudo \
+      && rm -rf /var/lib/apt/lists/*
+RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 USER jenkins
 
